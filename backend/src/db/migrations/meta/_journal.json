@@ -8,6 +8,13 @@
       "when": 1771229653253,
       "tag": "0000_thick_vanisher",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1771243423395,
+      "tag": "0001_violet_lorna_dane",
+      "breakpoints": true
     }
   ]
 }
