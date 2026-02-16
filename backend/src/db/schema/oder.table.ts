@@ -10,7 +10,7 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-import { restaurantTable } from "./restaurant.table";
+import { restaurantTable } from "./restaurant.table.js";
 
 export const orderStatusEnum = pgEnum("orderStatus", [
   "pending",

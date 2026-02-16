@@ -8,7 +8,7 @@ import {
   uuid,
   varchar,
 } from "drizzle-orm/pg-core";
-import { userTable } from "./user.table";
+import { userTable } from "./user.table.js";
 
 export const restaurantTable = pgTable(
   "restaurants",

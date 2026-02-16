@@ -8,8 +8,8 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
-import { restaurantTable } from "./restaurant.table";
-import { categoryTable } from "./category.table";
+import { restaurantTable } from "./restaurant.table.js";
+import { categoryTable } from "./category.table.js";
 
 export const menuItemTable = pgTable(
   "menuItems",

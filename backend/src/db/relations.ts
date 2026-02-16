@@ -1,10 +1,10 @@
 import { relations } from "drizzle-orm";
-import { userTable } from "./schema/user.table";
-import { restaurantTable } from "./schema/restaurant.table";
-import { categoryTable } from "./schema/category.table";
-import { menuItemTable } from "./schema/menuItem.table";
-import { orderTable } from "./schema/oder.table";
-import { orderItemTable } from "./schema/orderItem.table";
+import { userTable } from "./schema/user.table.js";
+import { restaurantTable } from "./schema/restaurant.table.js";
+import { categoryTable } from "./schema/category.table.js";
+import { menuItemTable } from "./schema/menuItem.table.js";
+import { orderTable } from "./schema/oder.table.js";
+import { orderItemTable } from "./schema/orderItem.table.js";
 
 //relations
 export const userRelations = relations(userTable, ({ one, many }) => {
