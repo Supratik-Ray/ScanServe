@@ -14,6 +14,7 @@ export const errorMiddleware = (
       message: err.message,
     });
   }
+  console.log(err.message);
   return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
     success: false,
     message: "Some Error occured! Please try again later",
