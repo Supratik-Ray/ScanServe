@@ -32,3 +32,6 @@ export const categoryTable = pgTable(
     check("notNegative", sql`${table.displayOrder} > 0`),
   ],
 );
+
+export type InsertCategory = typeof categoryTable.$inferInsert;
+export type SelectCategory = typeof categoryTable.$inferSelect;

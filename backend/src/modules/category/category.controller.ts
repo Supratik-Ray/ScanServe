@@ -1,9 +1,49 @@
 import { Request, Response } from "express";
+import {
+  createCategory,
+  deleteCategory,
+  getAllCategories,
+  updateCategory,
+} from "./category.service.js";
+import { sendResponse } from "@/utils/response.js";
+import { StatusCodes } from "http-status-codes";
+import { db } from "@/config/db.js";
 
-export function createCategory(req: Request, res: Response) {}
+export async function createCategoryController(req: Request, res: Response) {
+  const category = await createCategory(req.body, req.params.slug as string);
+  sendResponse(
+    res,
+    StatusCodes.CREATED,
+    "Successfully created category!",
+    category,
+  );
+}
 
-export function getAllCategories(req: Request, res: Response) {}
+export async function getAllCategoriesController(req: Request, res: Response) {
+  const categories = await getAllCategories(req.params.slug as string);
+  sendResponse(res, StatusCodes.OK, null, categories);
+}
 
-export function updateCategory(req: Request, res: Response) {}
+export async function updateCategoryController(req: Request, res: Response) {
+  const updatedCategory = await updateCategory(
+    req.body,
+    req.params.id as string,
+  );
+  sendResponse(
+    res,
+    StatusCodes.OK,
+    "Successfully updated category!",
+    updatedCategory,
+  );
+}
 
-export function deleteCategory(req: Request, res: Response) {}
+export async function deleteCategoryController(req: Request, res: Response) {
+  const deletedCategory = await deleteCategory(req.params.id as string);
+
+  sendResponse(
+    res,
+    StatusCodes.OK,
+    "Successfully deleted category!",
+    deletedCategory,
+  );
+}

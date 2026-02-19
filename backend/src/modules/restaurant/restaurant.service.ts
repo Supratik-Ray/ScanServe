@@ -50,37 +50,24 @@ export async function updateRestaurant(
   input: updateRestaurantInput,
   slug: string,
 ) {
-  const restaurant = await db.query.restaurantTable.findFirst({
-    where: eq(restaurantTable.slug, slug),
-  });
+  const filteredInput = Object.fromEntries(
+    Object.entries(input).filter(([, value]) => value !== undefined),
+  );
 
-  if (!restaurant)
+  const updatedRestaurants = await db
+    .update(restaurantTable)
+    .set(filteredInput)
+    .where(eq(restaurantTable.slug, slug))
+    .returning();
+
+  if (updatedRestaurants.length === 0) {
     throw new ApiError(
       StatusCodes.NOT_FOUND,
       "Restaurant with this slug not found!",
     );
-
-  const filteredInput = Object.fromEntries(
-    Object.entries(input).filter(([, value]) => value !== undefined),
-  );
-  const updatedRestaurantData: InsertRestaurant = {
-    ...restaurant,
-    ...filteredInput,
-  };
-
-  const [updatedRestaurant] = await db
-    .update(restaurantTable)
-    .set(updatedRestaurantData)
-    .where(eq(restaurantTable.slug, slug))
-    .returning();
-
-  if (!updateRestaurant)
-    throw new ApiError(
-      StatusCodes.INTERNAL_SERVER_ERROR,
-      "error updating Restaurant",
-    );
-
-  return updatedRestaurant;
+  }
+  
+  return updatedRestaurants[0];
 }
 
 export async function deleteRestaurant(slug: string) {
