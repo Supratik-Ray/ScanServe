@@ -1,17 +1,20 @@
 import { Router } from "express";
 import {
-  createMenuItem,
-  deleteMenuItem,
-  getAllMenuItems,
-  updateMenuItem,
+  createMenuItemController,
+  deleteMenuItemController,
+  getAllMenuItemsController,
+  updateMenuItemController,
 } from "./menuItem.controller.js";
 const router = Router();
 
 router
   .route("/restaurants/:slug/menuItems")
-  .get(getAllMenuItems)
-  .post(createMenuItem);
+  .get(getAllMenuItemsController)
+  .post(createMenuItemController);
 
-router.route("/menuItems/:id").patch(updateMenuItem).delete(deleteMenuItem);
+router
+  .route("/menuItems/:id")
+  .patch(updateMenuItemController)
+  .delete(deleteMenuItemController);
 
 export default router;

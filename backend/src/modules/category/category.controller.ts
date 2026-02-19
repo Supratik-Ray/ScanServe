@@ -7,10 +7,13 @@ import {
 } from "./category.service.js";
 import { sendResponse } from "@/utils/response.js";
 import { StatusCodes } from "http-status-codes";
-import { db } from "@/config/db.js";
+import { SelectCategory } from "@/db/index.js";
 
 export async function createCategoryController(req: Request, res: Response) {
-  const category = await createCategory(req.body, req.params.slug as string);
+  const category: SelectCategory = await createCategory(
+    req.body,
+    req.params.slug as string,
+  );
   sendResponse(
     res,
     StatusCodes.CREATED,
@@ -20,12 +23,14 @@ export async function createCategoryController(req: Request, res: Response) {
 }
 
 export async function getAllCategoriesController(req: Request, res: Response) {
-  const categories = await getAllCategories(req.params.slug as string);
+  const categories: SelectCategory[] = await getAllCategories(
+    req.params.slug as string,
+  );
   sendResponse(res, StatusCodes.OK, null, categories);
 }
 
 export async function updateCategoryController(req: Request, res: Response) {
-  const updatedCategory = await updateCategory(
+  const updatedCategory: SelectCategory = await updateCategory(
     req.body,
     req.params.id as string,
   );
@@ -38,7 +43,9 @@ export async function updateCategoryController(req: Request, res: Response) {
 }
 
 export async function deleteCategoryController(req: Request, res: Response) {
-  const deletedCategory = await deleteCategory(req.params.id as string);
+  const deletedCategory: SelectCategory = await deleteCategory(
+    req.params.id as string,
+  );
 
   sendResponse(
     res,

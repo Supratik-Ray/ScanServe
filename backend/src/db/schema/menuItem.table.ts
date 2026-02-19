@@ -33,3 +33,6 @@ export const menuItemTable = pgTable(
   },
   (table) => [index().on(table.restaurantId)],
 );
+
+export type InsertMenuItem = typeof menuItemTable.$inferInsert;
+export type SelectMenuItem = typeof menuItemTable.$inferSelect;

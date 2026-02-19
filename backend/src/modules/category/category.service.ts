@@ -60,27 +60,27 @@ export async function updateCategory(
   const filteredInput = Object.fromEntries(
     Object.entries(input).filter(([, value]) => value !== undefined),
   );
-  const updatedCategories = await db
+  const [updatedCategory] = await db
     .update(categoryTable)
     .set(filteredInput)
     .where(eq(categoryTable.id, categoryId))
     .returning();
 
-  if (updatedCategories.length === 0) {
+  if (!updatedCategory) {
     throw new ApiError(StatusCodes.OK, "category with this id doesn't exist");
   }
 
-  return updatedCategories[0];
+  return updatedCategory;
 }
 export async function deleteCategory(categoryId: string) {
-  const deletedCategories = await db
+  const [deletedCategory] = await db
     .delete(categoryTable)
     .where(eq(categoryTable.id, categoryId))
     .returning();
 
-  if (deletedCategories.length === 0) {
+  if (!deletedCategory) {
     throw new ApiError(StatusCodes.OK, "category with this id doesn't exist");
   }
 
-  return deletedCategories[0];
+  return deletedCategory;
 }
