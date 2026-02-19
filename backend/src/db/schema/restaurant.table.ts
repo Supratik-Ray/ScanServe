@@ -33,3 +33,6 @@ export const restaurantTable = pgTable(
     check("notNegative", sql`${table.maxTables} > 0`),
   ],
 );
+
+export type InsertRestaurant = typeof restaurantTable.$inferInsert;
+export type SelectRestaurant = typeof restaurantTable.$inferSelect;
