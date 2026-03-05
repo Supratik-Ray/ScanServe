@@ -1,15 +1,19 @@
 import { Router } from "express";
 import {
-  createOrder,
-  getAllCustomerOrders,
-  getAllRestaurantOrders,
-  updateOrderStatus,
+  createOrderController,
+  getAllCustomerOrdersController,
+  getAllRestaurantOrdersController,
+  updateOrderStatusController,
 } from "./order.controller.js";
+import { validate } from "@/middleware/validation.middleware.js";
+import { createOrderSchema } from "./order.validation.js";
 const router = Router();
 
-router.route("/restaurants/:slug/orders").get(getAllRestaurantOrders);
-router.route("/orders/me").get(getAllCustomerOrders);
-router.route("/orders").post(createOrder);
-router.route("/orders/:id").patch(updateOrderStatus);
+router
+  .route("/restaurants/:slug/orders")
+  .get(getAllRestaurantOrdersController)
+  .post(validate(createOrderSchema), createOrderController);
+router.route("/orders/me").get(getAllCustomerOrdersController);
+router.route("/orders/:id").patch(updateOrderStatusController);
 
 export default router;

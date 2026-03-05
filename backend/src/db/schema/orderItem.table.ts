@@ -32,3 +32,7 @@ export const orderItemTable = pgTable(
     check("notNegativePrice", sql`${table.priceSnapshot} > 0`),
   ],
 );
+
+export type InsertOrderItem = typeof orderItemTable.$inferInsert;
+export type SelectOrderItem = typeof orderItemTable.$inferSelect;
+

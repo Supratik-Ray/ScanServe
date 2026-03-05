@@ -19,6 +19,8 @@ export const orderStatusEnum = pgEnum("orderStatus", [
   "cancelled",
 ]);
 
+export type OrderStatus = (typeof orderStatusEnum.enumValues)[number];
+
 export const orderTable = pgTable(
   "orders",
   {
@@ -44,3 +46,6 @@ export const orderTable = pgTable(
     check("notNegativeAmount", sql`${table.totalAmount} > 0`),
   ],
 );
+
+export type InsertOrder = typeof orderTable.$inferInsert;
+export type SelectOrder = typeof orderTable.$inferSelect;
