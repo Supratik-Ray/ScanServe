@@ -1,0 +1,2 @@
+ALTER TABLE "restaurants" ADD COLUMN "onboardingStep" integer DEFAULT 1 NOT NULL;--> statement-breakpoint
+ALTER TABLE "restaurants" ADD CONSTRAINT "validOnboardingStep" CHECK ("restaurants"."onboardingStep" BETWEEN 1 AND 4);
